@@ -14,5 +14,6 @@
 #
 
 class DailyTrafficSerializer < ActiveModel::Serializer
-  attributes :id, :day, :messages, :megabytes, :seconds
+  attributes :id, :day, :messages, :megabytes, :seconds,
+  :plan_id
 end

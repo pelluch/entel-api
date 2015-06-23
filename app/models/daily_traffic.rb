@@ -14,6 +14,6 @@
 #
 
 class DailyTraffic < ActiveRecord::Base
-  belongs_to :plan_type
+  belongs_to :plan
   belongs_to :user
 end

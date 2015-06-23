@@ -91,7 +91,8 @@ u2.save
 	day: day, 
 	seconds: (rand*3600).round,
 	messages: (rand*10).round,
-	megabytes: (rand*80).round
+	megabytes: (rand*80).round,
+	plan: u1.plan
 end
 
 25.times do |i|
@@ -100,5 +101,6 @@ end
 	day: day, 
 	seconds: (rand*3600).round,
 	messages: (rand*10).round,
-	megabytes: (rand*80).round
+	megabytes: (rand*80).round,
+	plan: u2.plan
 end
