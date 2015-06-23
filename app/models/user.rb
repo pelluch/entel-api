@@ -30,7 +30,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_presence_of [ :rut, :phone_number ]
-  validates_uniqueness_of [ :rut, :phone_number, :email ]
+  validates_uniqueness_of [ :rut, :phone_number ]
+  validates_uniqueness_of :email, allow_nil: true
   
   belongs_to :plan
   has_many :daily_traffics

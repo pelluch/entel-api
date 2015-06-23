@@ -9,6 +9,12 @@
 #
 
 class PlanType < ActiveRecord::Base
+
 	has_many :plans
-	has_many :daily_traffics
+
+	validates_presence_of [ :name ]
+	validates_uniqueness_of [ :name ]
+	accepts_nested_attributes_for :plans
+
+
 end

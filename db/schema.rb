@@ -11,23 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623020431) do
+ActiveRecord::Schema.define(version: 20150623045056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "daily_traffics", force: :cascade do |t|
-    t.integer  "plan_type_id"
     t.integer  "user_id"
-    t.date     "day",                        null: false
-    t.integer  "messages",     default: 0,   null: false
-    t.float    "megabytes",    default: 0.0, null: false
-    t.integer  "seconds",      default: 0,   null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.date     "day",                      null: false
+    t.integer  "messages",   default: 0,   null: false
+    t.float    "megabytes",  default: 0.0, null: false
+    t.integer  "seconds",    default: 0,   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "plan_id"
   end
 
-  add_index "daily_traffics", ["plan_type_id"], name: "index_daily_traffics_on_plan_type_id", using: :btree
+  add_index "daily_traffics", ["plan_id"], name: "index_daily_traffics_on_plan_id", using: :btree
   add_index "daily_traffics", ["user_id"], name: "index_daily_traffics_on_user_id", using: :btree
 
   create_table "plan_types", force: :cascade do |t|
@@ -40,11 +40,14 @@ ActiveRecord::Schema.define(version: 20150623020431) do
 
   create_table "plans", force: :cascade do |t|
     t.integer  "plan_type_id"
-    t.text     "name",           null: false
-    t.integer  "price",          null: false
-    t.integer  "internet_price", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.text     "name",                              null: false
+    t.integer  "price",                             null: false
+    t.integer  "internet_price"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "minutes",           default: 0,     null: false
+    t.integer  "megabytes",         default: 0,     null: false
+    t.boolean  "unlimited_minutes", default: false, null: false
   end
 
   add_index "plans", ["plan_type_id", "name"], name: "index_plans_on_plan_type_id_and_name", unique: true, using: :btree
@@ -77,7 +80,7 @@ ActiveRecord::Schema.define(version: 20150623020431) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["rut"], name: "index_users_on_rut", unique: true, using: :btree
 
-  add_foreign_key "daily_traffics", "plan_types"
+  add_foreign_key "daily_traffics", "plans"
   add_foreign_key "daily_traffics", "users"
   add_foreign_key "plans", "plan_types"
   add_foreign_key "users", "plans"
