@@ -31,7 +31,7 @@ gem 'cancan', '~> 1.6.10'
 group :development do
 	gem 'thin', '~> 1.6.3'
 	gem 'annotate', '~> 2.6.10'	
-	gem 'rails-erd', '~> 1.3.1'
+	gem 'rails-erd', '~> 1.4.0'
 	gem 'capistrano-rails', '~> 1.1.3'
 	gem 'capistrano-rvm', '~> 0.1.2'
 	gem 'capistrano-passenger', '~> 0.0.5'

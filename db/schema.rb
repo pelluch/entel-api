@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623005118) do
+ActiveRecord::Schema.define(version: 20150623015257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plan_types", force: :cascade do |t|
+    t.text     "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "plan_types", ["name"], name: "index_plan_types_on_name", unique: true, using: :btree
+
+  create_table "plans", force: :cascade do |t|
+    t.integer  "plan_type_id"
+    t.text     "name",           null: false
+    t.integer  "price",          null: false
+    t.integer  "internet_price", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "plans", ["plan_type_id", "name"], name: "index_plans_on_plan_type_id_and_name", unique: true, using: :btree
+  add_index "plans", ["plan_type_id"], name: "index_plans_on_plan_type_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.text     "email"
@@ -34,11 +54,15 @@ ActiveRecord::Schema.define(version: 20150623005118) do
     t.text     "account_holder"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "plan_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["phone_number"], name: "index_users_on_phone_number", unique: true, using: :btree
+  add_index "users", ["plan_id"], name: "index_users_on_plan_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["rut"], name: "index_users_on_rut", unique: true, using: :btree
 
+  add_foreign_key "plans", "plan_types"
+  add_foreign_key "users", "plans"
 end
