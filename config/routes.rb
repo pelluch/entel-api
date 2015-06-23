@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-
-
-  resources :plans
-  resources :plan_types
-  resources :users, only: [ :create ]
+  
+  resources :plan_types, only: [ :index ] do
+    resources :plans, only: [ :index ]
+  end
+  resources :users, only: [ :create ] do
+    resource :plan, only: [ :show ]
+    resources :daily_traffics, only: [ :index ]
+  end
   # devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

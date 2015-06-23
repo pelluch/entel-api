@@ -10,4 +10,5 @@
 
 class PlanType < ActiveRecord::Base
 	has_many :plans
+	has_many :daily_traffics
 end

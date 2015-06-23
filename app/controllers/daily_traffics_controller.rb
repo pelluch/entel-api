@@ -1,0 +1,2 @@
+class DailyTrafficsController < ApplicationController
+end

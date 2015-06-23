@@ -33,7 +33,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of [ :rut, :phone_number, :email ]
   
   belongs_to :plan
-
+  has_many :daily_traffics
+  
   def email_required?
   	false
   end
