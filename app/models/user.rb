@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_presence_of [ :rut, :phone_number ]
-  validates_uniqueness_of [ :rut, :phone_number ]
+  validates_uniqueness_of [ :rut, :phone_number, :email ]
   
   def email_required?
   	false
