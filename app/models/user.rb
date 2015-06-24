@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable
 
   validates_presence_of [ :rut, :phone_number ]
   validates_uniqueness_of [ :rut, :phone_number ]
@@ -39,4 +39,25 @@ class User < ActiveRecord::Base
   def email_required?
   	false
   end
+
+  def create_token
+    app = doorkeeper_app
+    if not app
+      app = Doorkeeper::Application.create name: "entel", redirect_uri: "https://127.0.0.1"
+    end
+    Doorkeeper::AccessToken.create resource_owner_id: self.id, application_id: app.id
+  end
+
+  def doorkeeper_app
+    @app ||= Doorkeeper::Application.find_by_name("entel")    
+  end
+
+  def access_tokens
+    Doorkeeper::AccessToken.where(resource_owner_id: id)
+  end
+
+  def access_token
+    access_tokens.last
+  end
+  
 end

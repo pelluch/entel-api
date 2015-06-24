@@ -27,5 +27,6 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :email, :first_name, :last_name, :rut, :phone_number,
   :account_holder
 
-
+  has_one :access_token, serializer: AccessTokenSerializer
+  
 end
