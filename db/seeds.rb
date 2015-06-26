@@ -104,3 +104,20 @@ end
 	megabytes: (rand*80).round,
 	plan: u2.plan
 end
+
+Venue.create([
+	{
+		latitude: -33.457339,
+		longitude: -70.638056,
+		address: 'Manuel Antonio Matta 470',
+		commune: 'Santiago',
+		region: 'Región Metropolitana'
+	},
+	{
+		latitude: -33.442343,
+		longitude: -70.626137,
+		address: 'Italia 850',
+		commune: 'Providencia',
+		region: 'Región Metropolitana'
+	}
+])

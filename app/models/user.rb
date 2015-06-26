@@ -40,6 +40,12 @@ class User < ActiveRecord::Base
   	false
   end
 
+  def monthly_traffic
+    monthly = daily_traffics.select("SUM(daily_traffics.megabytes) as megabytes, SUM(daily_traffics.messages) as messages,
+       SUM(daily_traffics.seconds) as seconds").where("day > ? AND day < ?", Date.today.beginning_of_month, Date.today.end_of_month)
+    monthly.as_json.first.except! "id"
+  end
+
   def create_token
     app = doorkeeper_app
     if not app
