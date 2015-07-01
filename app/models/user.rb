@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   def monthly_traffic
     monthly = daily_traffics.select("SUM(daily_traffics.megabytes) as megabytes, SUM(daily_traffics.messages) as messages,
-       SUM(daily_traffics.seconds) as seconds").where("day > ? AND day < ?", Date.today.beginning_of_month, Date.today.end_of_month)
+       SUM(daily_traffics.seconds) as seconds").where("day > ? AND day < ?", Date.today - 1.month, Date.today)
     monthly = monthly.as_json.first.except! "id"
     monthly["plan_name"] = plan.name
     monthly["plan_type_name"] = plan.plan_type.name

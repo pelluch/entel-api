@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'entel'
+set :application, 'api'
 set :repo_url, 'git@github.com:pelluch/entel-api.git'
 set :branch, 'master'
 
@@ -12,7 +12,7 @@ set :ssh_options, {
 }
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/srv/http/www/echeckit/entel'
+set :deploy_to, '/srv/http/www/entel/api'
 
 # Default value for :scm is :git
 set :scm, :git
