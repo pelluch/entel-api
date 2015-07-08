@@ -24,9 +24,14 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :rut, :phone_number,
-  :account_holder
+	attributes :id, :email, :first_name, :last_name, :name, :rut, :phone_number,
+	:account_holder
 
-  has_one :access_token, serializer: AccessTokenSerializer
-  
+	has_one :access_token, serializer: AccessTokenSerializer
+	def account_holder
+		if object.account_holder.present?
+			object.account_holder.name
+		end
+	end
+
 end

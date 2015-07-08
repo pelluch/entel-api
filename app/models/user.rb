@@ -40,6 +40,14 @@ class User < ActiveRecord::Base
   	false
   end
 
+  def name
+    name = first_name
+    if last_name.present?
+      name = name + " " + last_name
+    end
+    name
+  end
+
   def monthly_traffic
     monthly = daily_traffics.select("SUM(daily_traffics.megabytes) as megabytes, SUM(daily_traffics.messages) as messages,
        SUM(daily_traffics.seconds) as seconds").where("day > ? AND day < ?", Date.today - 1.month, Date.today)
