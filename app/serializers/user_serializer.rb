@@ -28,10 +28,5 @@ class UserSerializer < ActiveModel::Serializer
 	:account_holder
 
 	has_one :access_token, serializer: AccessTokenSerializer
-	def account_holder
-		if object.account_holder.present?
-			object.account_holder.name
-		end
-	end
 
 end
