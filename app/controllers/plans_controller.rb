@@ -1,9 +1,9 @@
 class PlansController < ApplicationController
 
+	before_action :doorkeeper_authorize!, only: :show
 
-	def show
-		user = User.find(params[:user_id])
-		render json: user.plan, status: :ok
+	def show		
+		render json: current_user.plan, status: :ok
 	end
 
 	def index
